@@ -1,0 +1,16 @@
+[{
+	"Name": "autotheme",
+	"Description": "Automatically sets the colorscheme of micro based on syntax (filetype).",
+	"Author": "Aki Kareha",
+	"Tags": ["color", "colorscheme", "theme", "syntax", "language", "auto", "visual"],
+	"Website": "https://github.com/akikareha/micro-autotheme-plugin",
+	"Versions": [
+		{
+			"Version": "0.0.0",
+			"Url": "https://github.com/akikareha/micro-autotheme-plugin/archive/v0.0.0.zip",
+			"Require": {
+				"micro": ">=2.0.0"
+			}
+		}
+	]
+}]
