@@ -1,4 +1,4 @@
-VERSION = "0.0.0"
+VERSION = "0.0.1"
 
 local theme = {
 	markdown = "solarized-light",
@@ -9,8 +9,8 @@ local theme = {
 
 local config = import("micro/config")
 
-function onBufPaneOpen(bp)
-	local scheme = theme[bp.Buf:FileType()] or theme.unknown
+function onBufferOpen(buf)
+	local scheme = theme[buf:FileType()] or theme.unknown
 	config.SetGlobalOption("colorscheme", scheme)
 end
 

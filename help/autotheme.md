@@ -8,7 +8,7 @@ visibility and mood depending on what you're working on.
 
 ## Features
 
-- Automatically switches colorscheme when a file is opened in a pane
+- Automatically switches colorscheme when a file is opened
 
 ## Configuration
 
@@ -28,16 +28,8 @@ The key should match the result of `Buf:FileType()`.
 
 ## Limitations
 
-The theme switch relies on the `onBufPaneOpen` hook, which is triggered when a
-buffer is newly displayed in a pane.  
-As a result:
-
-- It **does not trigger** when opening a file via the `open` command, since
-  this reuses the current pane without creating a new one.
-- It **may not trigger** when switching between already opened buffers using
-  `NextSplit` (`Ctrl-w`) or `PreviousTab` (`Alt-,`) / `NextTab` (`Alt-.`),
-  unless the buffer is reopened in a new pane (e.g. via `tab`, `hsplit`, or
-  `vsplit`).
-
-In short, theme switching works best when a file is opened in a **new pane** or
-at **editor startup**.
+The theme switch relies on the `onBufferOpen` hook, which is triggered when a
+buffer is newly opened.  
+As a result, it **may not trigger** when switching between already opened
+buffers using `NextSplit` (`Ctrl-w`), `PreviousTab` (`Alt-,`), or `NextTab`
+(`Alt-.`).
