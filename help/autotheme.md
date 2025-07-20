@@ -12,19 +12,17 @@ visibility and mood depending on what you're working on.
 
 ## Configuration
 
-Edit the `autotheme.lua` file to customize your theme mapping:
+In your `settings.json`, set the following option using space-separated
+`key=value` pairs:
 
-```lua
-local theme = {
-    markdown = "solarized-light",
-    lua = "darcula",
-    shell = "monokai",
-    unknown = "simple",
+```json
+{
+    "autotheme.mapping": "lua=darcula python=monokai shell=twilight"
 }
 ```
 
-You can add or change the mappings as needed.
-The key should match the result of `Buf:FileType()`.
+The key is the filetype (as reported by `Buf:FileType()`), and the value is
+the colorscheme name.
 
 ## Limitations
 
