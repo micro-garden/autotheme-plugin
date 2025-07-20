@@ -11,6 +11,7 @@ local theme = {
 	unknown = theme_unknown,
 }
 
+local micro = import("micro")
 local config = import("micro/config")
 
 local function parse_theme_mapping(raw)
@@ -42,7 +43,48 @@ function onBufferOpen(buf)
 	apply_theme(buf)
 end
 
+function setMapping(bp, args)
+	local lang, scheme
+
+	if #args == 0 then
+		lang = bp.Buf:FileType()
+		scheme = config.GetGlobalOption("colorscheme") or theme_unknown
+	elseif #args == 1 and args[1] == "false" then
+		lang = bp.Buf:FileType()
+		scheme = "false"
+	elseif #args == 1 then
+		lang = args[1]
+		scheme = config.GetGlobalOption("colorscheme") or theme_unknown
+	else
+		lang = args[1]
+		scheme = args[2]
+	end
+
+	local raw = config.GetGlobalOption("autotheme.mapping") or ""
+	local mapping = parse_theme_mapping(raw)
+
+	if scheme == "false" then
+		if mapping[lang] ~= nil then
+			mapping[lang] = nil
+			micro.InfoBar():Message("autotheme: removed mapping for " .. lang)
+		else
+			micro.InfoBar():Message("autotheme: no mapping to remove for " .. lang)
+		end
+	else
+		mapping[lang] = scheme
+		micro.InfoBar():Message("autotheme: set " .. lang .. "=" .. scheme)
+	end
+
+	local new_parts = {}
+	for k, v in pairs(mapping) do
+		table.insert(new_parts, k .. "=" .. v)
+	end
+	local new_raw = table.concat(new_parts, " ")
+	config.SetGlobalOption("autotheme.mapping", new_raw)
+end
+
 function init()
-	--config.RegisterGlobalOption("autotheme", "mapping", "")
+	config.RegisterGlobalOption("autotheme", "mapping", "")
+	config.MakeCommand("setautotheme", setMapping, config.NoComplete)
 	config.AddRuntimeFile("autotheme", config.RTHelp, "help/autotheme.md")
 end

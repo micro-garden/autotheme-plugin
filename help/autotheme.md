@@ -8,12 +8,54 @@ visibility and mood depending on what you're working on.
 
 ## Features
 
-- Automatically switches colorscheme when a file is opened
+- Automatically switches colorscheme based on the filetype when a file is
+  opened
+- Supports flexible per-language theme mappings
+- Allows interactive configuration via the `setautotheme` command
 
 ## Configuration
 
-In your `settings.json`, set the following option using space-separated
-`key=value` pairs:
+### Interactive command
+
+You can use the `setautotheme` command to manage theme mappings directly
+within micro.
+
+To assign the current colorscheme to the current buffer's filetype:
+
+```
+setautotheme
+```
+
+To remove the mapping for the current buffer's filetype:
+
+```
+setautotheme false
+```
+
+To explicitly set a mapping:
+
+```
+setautotheme <filetype> [colorscheme]
+```
+
+- If `colorscheme` is omitted, the currently active colorscheme will be used.
+- If `colorscheme` is `false`, the mapping for the specified filetype will be
+  removed.
+
+Examples:
+
+```
+setautotheme lua darcula # Set darcula for Lua
+setautotheme markdown # Set current theme for Markdown
+setautotheme lua false # Remove Lua mapping
+```
+
+All mappings are stored in the `autotheme.mapping` global setting.
+
+### Settings file
+
+Alternatively, you can configure mappings manually in your `settings.json`
+file using space-separated `key=value` pairs:
 
 ```json
 {
@@ -21,8 +63,10 @@ In your `settings.json`, set the following option using space-separated
 }
 ```
 
-The key is the filetype (as reported by `Buf:FileType()`), and the value is
-the colorscheme name.
+You can also use newline characters (`\n`) in the string if desired.
+
+Each key should be a filetype (as returned by `Buf:FileType()`), and the value
+is the name of the colorscheme to apply.
 
 ## Limitations
 
