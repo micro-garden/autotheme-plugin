@@ -7,6 +7,8 @@ text editor that automatically sets the colorscheme based on the filetype
 This allows you to use different themes for different languages, improving
 visibility and mood depending on what you're working on.
 
+See [help/autotheme.md](help/autotheme.md) for more details.
+
 ## Installation
 
 Place the plugin folder in `~/.config/micro/plug/autotheme/`, or clone it
