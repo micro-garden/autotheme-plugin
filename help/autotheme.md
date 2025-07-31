@@ -1,7 +1,7 @@
 # Auto Theme Plugin
 
-**Auto Theme** is a plugin for the micro text editor that automatically sets
-the colorscheme based on the filetype (syntax) of the currently opened buffer.
+**Auto Theme** is a plugin that automatically sets the colorscheme based on
+the filetype (syntax) of the currently opened buffer.
 
 This allows you to use different themes for different languages, improving
 visibility and mood depending on what you're working on.
