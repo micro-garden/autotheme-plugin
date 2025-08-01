@@ -4,6 +4,7 @@
 	"Author": "Aki Kareha",
 	"Tags": ["color", "colorscheme", "theme", "syntax", "language", "auto", "visual"],
 	"Website": "https://github.com/akikareha/micro-autotheme-plugin",
+	"License": "MIT",
 	"Versions": [
 		{
 			"Version": "0.0.2",
