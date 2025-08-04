@@ -1,4 +1,4 @@
-VERSION = "0.0.2"
+VERSION = "0.0.3"
 
 local theme_unknown = "simple"
 local theme = {
@@ -43,7 +43,7 @@ function onBufferOpen(buf)
 	apply_theme(buf)
 end
 
-function setMapping(bp, args)
+function SetAutoThemeCmd(bp, args)
 	local lang, scheme
 
 	if #args == 0 then
@@ -83,8 +83,11 @@ function setMapping(bp, args)
 	config.SetGlobalOption("autotheme.mapping", new_raw)
 end
 
+function preinit()
+	config.RegisterCommonOption("autotheme", "mapping", "")
+end
+
 function init()
-	config.RegisterGlobalOption("autotheme", "mapping", "")
-	config.MakeCommand("setautotheme", setMapping, config.NoComplete)
+	config.MakeCommand("setautotheme", SetAutoThemeCmd, config.NoComplete)
 	config.AddRuntimeFile("autotheme", config.RTHelp, "help/autotheme.md")
 end
