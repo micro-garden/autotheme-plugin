@@ -1,4 +1,4 @@
-VERSION = "0.0.3"
+VERSION = "0.0.4"
 
 local theme_unknown = "simple"
 local theme = {
@@ -16,7 +16,7 @@ local config = import("micro/config")
 
 local function parse_theme_mapping(raw)
 	local mapping = {}
-	for line in raw:gmatch("[^\n%s]+") do
+	for line in raw:gmatch("[^\n]+") do
 		local key, value = line:match("^(.-)=(.+)$")
 		if key and value then
 			mapping[key] = value
@@ -43,7 +43,7 @@ function onBufferOpen(buf)
 	apply_theme(buf)
 end
 
-function SetAutoThemeCmd(bp, args)
+function SetAutoTheme(bp, args)
 	local lang, scheme
 
 	if #args == 0 then
@@ -79,7 +79,7 @@ function SetAutoThemeCmd(bp, args)
 	for k, v in pairs(mapping) do
 		table.insert(new_parts, k .. "=" .. v)
 	end
-	local new_raw = table.concat(new_parts, " ")
+	local new_raw = table.concat(new_parts, "\n")
 	config.SetGlobalOption("autotheme.mapping", new_raw)
 end
 
@@ -88,6 +88,6 @@ function preinit()
 end
 
 function init()
-	config.MakeCommand("setautotheme", SetAutoThemeCmd, config.NoComplete)
+	config.MakeCommand("setautotheme", SetAutoTheme, config.NoComplete)
 	config.AddRuntimeFile("autotheme", config.RTHelp, "help/autotheme.md")
 end
